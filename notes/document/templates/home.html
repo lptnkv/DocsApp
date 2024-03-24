@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    
+    <h1 class="title">This is notes app</h1>
+    <p class="subtitle">Hello, {{ user.username }}!</p>
+
+    {% if documents %}
+        <p class="subtitle">Your documents:</p>
+        <ul>
+            {% for doc in documents %}
+            <li class="subtitle">
+                <a href="/note/{{ doc.id }}">{{ doc.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>you have no documents yet</p>
+        {% endif %}
+    {% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+  <a href="/regsiter">Register</a>
+{% endif %}
+{% endblock %}

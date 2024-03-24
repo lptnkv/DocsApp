@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Notes App{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <style>
+        body {
+            margin: 10px;
+        }
+        button {
+          background: none!important;
+          border: none;
+          padding: 0!important;
+          /*optional*/
+          font-family: arial, sans-serif;
+          /*input has OS specific font-family*/
+          color: blue;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <nav class="navbar is-dark">
+        <div class="navbar-brand">
+            <a href="/" class="navbar-item">Notes</a>
+        </div>
+        <div class="navbar-menu">
+            {% if user.is_authenticated %}
+            <div class="navbar-end">
+                <a href="/note" class="navbar-item">Logged in as: {{ user }}</a>
+                <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Sign Out</button>
+                </form>
+            </div>
+            {% else %}
+
+            {% endif %}
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+</main>
+</body>
+</html>
